@@ -7,3 +7,4 @@ const kTransitionDuration = Duration(microseconds: 300);
 const kGTSectraFineFontFamily = 'GT Sectra Fine Regular';
 
 const kFeaturedBooksBox = 'featured_box';
+const kNewestBooksBox = 'newest_box';
