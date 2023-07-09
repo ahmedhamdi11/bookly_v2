@@ -27,7 +27,7 @@ class BookDesc extends StatelessWidget {
             style: Styles.text16,
           ),
           Text(
-            'this is the book description',
+            book.desc!,
             style: Styles.text14,
           ),
           const SizedBox(
@@ -40,8 +40,7 @@ class BookDesc extends StatelessWidget {
             style: Styles.text16,
           ),
           Text(
-            'English',
-            // book.volumeInfo.language ?? '-',
+            book.language!,
             style: Styles.text14,
           ),
           const SizedBox(
@@ -54,8 +53,7 @@ class BookDesc extends StatelessWidget {
             style: Styles.text16,
           ),
           Text(
-            //book.volumeInfo.publisher ?? '-',
-            'publisher name',
+            book.publisher!,
             style: Styles.text14,
             maxLines: 2,
           ),
@@ -69,8 +67,7 @@ class BookDesc extends StatelessWidget {
             style: Styles.text16,
           ),
           Text(
-            //book.volumeInfo.publishedDate ?? '-',
-            '2019',
+            book.publisheDate!,
             style: Styles.text14,
             maxLines: 2,
           ),

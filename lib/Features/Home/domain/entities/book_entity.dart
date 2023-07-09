@@ -18,11 +18,27 @@ class BookEntity {
   @HiveField(4)
   final num? rateCount;
 
+  @HiveField(5)
+  final String? desc;
+
+  @HiveField(6)
+  final String? language;
+
+  @HiveField(7)
+  final String? publisher;
+
+  @HiveField(8)
+  final String? publisheDate;
+
   const BookEntity({
     required this.image,
     required this.title,
     required this.authorName,
     required this.rating,
     required this.rateCount,
+    required this.desc,
+    required this.language,
+    required this.publisher,
+    required this.publisheDate,
   });
 }
