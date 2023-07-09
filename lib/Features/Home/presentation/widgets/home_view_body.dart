@@ -1,7 +1,10 @@
+import 'package:bookly_v2/Features/Home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/best_seller_books.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/featured_books.dart';
+import 'package:bookly_v2/Features/Home/presentation/widgets/featured_books_shimmer.dart';
 import 'package:bookly_v2/core/utils/syles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -12,9 +15,19 @@ class HomeViewBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           //featured books listView
-          FeaturedBooks(),
+          BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
+            builder: (context, state) {
+              if (state is FeaturedBooksSuccessState) {
+                return const FeaturedBooks();
+              } else if (state is FeaturedBooksFailureState) {
+                return Text(state.errMessage);
+              } else {
+                return const FeaturedBooksShimmer();
+              }
+            },
+          ),
 
           //Best seller title
           Padding(

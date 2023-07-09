@@ -11,6 +11,6 @@ class FetchFeaturedBooksUseCase extends UseCase<List<BookEntity>, void> {
 
   @override
   Future<Either<Failure, List<BookEntity>>> excute([void param]) async {
-    throw await homeRepo.featchFeaturedBooks();
+    return await homeRepo.featchFeaturedBooks();
   }
 }

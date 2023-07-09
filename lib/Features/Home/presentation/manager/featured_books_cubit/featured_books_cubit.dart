@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/Features/Home/domain/use_cases/featch_featured_books_use_case.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'featured_books_state.dart';
 

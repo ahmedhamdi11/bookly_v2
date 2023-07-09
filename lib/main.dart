@@ -6,6 +6,7 @@ import 'package:bookly_v2/Features/Home/presentation/manager/featured_books_cubi
 import 'package:bookly_v2/Features/Home/presentation/manager/newest_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_v2/core/constants.dart';
 import 'package:bookly_v2/core/utils/app_router.dart';
+import 'package:bookly_v2/core/utils/bloc_observer.dart';
 import 'package:bookly_v2/core/utils/functions/setup_service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +16,14 @@ import 'package:hive_flutter/adapters.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  Bloc.observer = MyBlocObserver();
+
+  setupServiceLocator();
+
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(kFeaturedBooksBox);
-  await Hive.openBox(kNewestBooksBox);
+  await Hive.openBox<BookEntity>(kFeaturedBooksBox);
+  await Hive.openBox<BookEntity>(kNewestBooksBox);
 
   runApp(const BooklyAppV2());
 }
