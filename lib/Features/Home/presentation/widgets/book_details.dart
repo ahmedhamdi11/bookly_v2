@@ -1,3 +1,4 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_rating.dart';
 import 'package:bookly_v2/core/utils/syles.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +6,9 @@ import 'package:flutter/material.dart';
 class BookDetails extends StatelessWidget {
   const BookDetails({
     super.key,
-    //required this.book,
+    required this.book,
   });
-  //final BookModel book;
+  final BookEntity book;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,8 @@ class BookDetails extends StatelessWidget {
       child: Column(
         children: [
           //book titl
-          const Text(
-            // book.volumeInfo.title ?? '',
-            'the booke title',
+          Text(
+            book.title,
             style: Styles.text30,
             textAlign: TextAlign.center,
           ),
@@ -28,8 +28,7 @@ class BookDetails extends StatelessWidget {
 
           //book author
           Text(
-            //book.volumeInfo.authors?[0] ?? '',
-            'the book author',
+            book.authorName ?? '',
             style: Styles.text18.copyWith(
                 color: Colors.white.withOpacity(0.7),
                 fontWeight: FontWeight.w500),
@@ -37,10 +36,7 @@ class BookDetails extends StatelessWidget {
           const SizedBox(
             height: 14.0,
           ),
-          const BookRating(
-              count: 60, //book.volumeInfo.ratingsCount,
-              rate: 8.0 //book.volumeInfo.averageRating,
-              ),
+          BookRating(count: book.rateCount, rate: book.rating),
         ],
       ),
     );

@@ -16,10 +16,9 @@ class FeaturedBookItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16.0),
       child: InkWell(
         onTap: () {
-          GoRouter.of(context).push(
-            AppRouter.bookDetailsViewPath,
-            //extra: book,
-          );
+          GoRouter.of(context).push(AppRouter.bookDetailsViewPath, extra: book
+              //extra: book,
+              );
         },
         child: BookImage(
           imageUrl: book.image ??

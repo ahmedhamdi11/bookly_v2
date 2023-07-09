@@ -1,12 +1,13 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/core/utils/syles.dart';
 import 'package:flutter/material.dart';
 
 class BookDesc extends StatelessWidget {
   const BookDesc({
     super.key,
-    // required this.book,
+    required this.book,
   });
-  //final BookModel book;
+  final BookEntity book;
   @override
   Widget build(BuildContext context) {
     return Container(

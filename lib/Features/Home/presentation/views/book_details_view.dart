@@ -1,3 +1,4 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_details_view_body.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,9 @@ import 'package:go_router/go_router.dart';
 class BookDetailsView extends StatefulWidget {
   const BookDetailsView({
     super.key,
-    //required this.book,
+    required this.book,
   });
-  //final BookModel book;
+  final BookEntity book;
 
   @override
   State<BookDetailsView> createState() => _BookDetailsViewState();
@@ -35,8 +36,8 @@ class _BookDetailsViewState extends State<BookDetailsView> {
         ),
       ),
       body: BookDetailsViewBody(
-          // book: widget.book,
-          ),
+        book: widget.book,
+      ),
     );
   }
 }

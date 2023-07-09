@@ -1,3 +1,4 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_actions.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_desc.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_details.dart';
@@ -8,9 +9,9 @@ import 'package:flutter/material.dart';
 class BookDetailsViewBody extends StatelessWidget {
   const BookDetailsViewBody({
     super.key,
-    //required this.book,
+    required this.book,
   });
-  //final BookModel book;
+  final BookEntity book;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,10 +25,8 @@ class BookDetailsViewBody extends StatelessWidget {
           //book image
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.45,
-            child: const BookImage(
-              imageUrl:
-                  'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1637008457',
-              // imageUrl: book.volumeInfo.imageLinks?.thumbnail,
+            child: BookImage(
+              imageUrl: book.image,
             ),
           ),
           const SizedBox(
@@ -35,7 +34,9 @@ class BookDetailsViewBody extends StatelessWidget {
           ),
 
           //book (title,author,rating)
-          const BookDetails(),
+          BookDetails(
+            book: book,
+          ),
           const SizedBox(
             height: 37.0,
           ),
@@ -49,9 +50,9 @@ class BookDetailsViewBody extends StatelessWidget {
           ),
 
           //book desc
-          const BookDesc(
-              //book: book,
-              ),
+          BookDesc(
+            book: book,
+          ),
 
           //similar books (title,BookslistView)
           const SimilarBooks(

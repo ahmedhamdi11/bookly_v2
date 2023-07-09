@@ -16,9 +16,7 @@ class BestSellerItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
       child: InkWell(
         onTap: () {
-          GoRouter.of(context).push(
-            AppRouter.bookDetailsViewPath,
-          );
+          GoRouter.of(context).push(AppRouter.bookDetailsViewPath, extra: book);
         },
         child: SizedBox(
           height: 125,
@@ -59,11 +57,11 @@ class BestSellerItem extends StatelessWidget {
                     ),
 
                     //book rating
-                    const Row(
+                    Row(
                       children: [
                         BookRating(
-                          rate: 8.5,
-                          count: 50,
+                          rate: book.rating,
+                          count: book.rateCount,
                         ),
 
                         // if (book.accessInfo?.pdf?.downloadLink != null)
