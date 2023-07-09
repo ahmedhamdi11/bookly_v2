@@ -4,10 +4,10 @@ import 'package:bookly_v2/core/errors/failure.dart';
 import 'package:bookly_v2/core/use_cases/use_case.dart';
 import 'package:dartz/dartz.dart';
 
-class FeatchFeaturedBooksUseCase extends UseCase<List<BookEntity>, void> {
+class FetchFeaturedBooksUseCase extends UseCase<List<BookEntity>, void> {
   final HomeRepo homeRepo;
 
-  FeatchFeaturedBooksUseCase(this.homeRepo);
+  FetchFeaturedBooksUseCase(this.homeRepo);
 
   @override
   Future<Either<Failure, List<BookEntity>>> excute([void param]) async {
