@@ -1,7 +1,9 @@
 import 'package:bookly_v2/Features/Home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
+import 'package:bookly_v2/Features/Home/presentation/manager/newest_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/best_seller_books.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/featured_books.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/featured_books_shimmer.dart';
+import 'package:bookly_v2/Features/Home/presentation/widgets/newest_books_shimmer.dart';
 import 'package:bookly_v2/core/utils/syles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +22,9 @@ class HomeViewBody extends StatelessWidget {
           BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
             builder: (context, state) {
               if (state is FeaturedBooksSuccessState) {
-                return const FeaturedBooks();
+                return FeaturedBooks(
+                  books: state.featuredBooks,
+                );
               } else if (state is FeaturedBooksFailureState) {
                 return Text(state.errMessage);
               } else {
@@ -29,21 +33,33 @@ class HomeViewBody extends StatelessWidget {
             },
           ),
 
-          //Best seller title
-          Padding(
+          // Newest Books title
+          const Padding(
             padding: EdgeInsets.only(left: 24.0),
             child: Text(
-              'Best Seller',
+              'Newest Books',
               style: Styles.text18,
             ),
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
 
           //best seller listViw
-          BestSellerBooks(),
+          BlocBuilder<NewestBooksCubit, NewestBooksState>(
+            builder: (context, state) {
+              if (state is NewestBooksSuccessState) {
+                return BestSellerBooks(
+                  books: state.newestBooks,
+                );
+              } else if (state is NewestBooksFailureState) {
+                return Text(state.errMessage);
+              } else {
+                return const NewestBooksShimmer();
+              }
+            },
+          ),
         ],
       ),
     );

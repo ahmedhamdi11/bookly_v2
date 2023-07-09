@@ -1,3 +1,4 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_image.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/book_rating.dart';
 import 'package:bookly_v2/core/constants.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BestSellerItem extends StatelessWidget {
-  const BestSellerItem({super.key, required this.image});
-  final String? image;
+  const BestSellerItem({super.key, required this.book});
+  final BookEntity book;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +27,7 @@ class BestSellerItem extends StatelessWidget {
               //book image
               BookImage(
                 borderRadius: 8.0,
-                imageUrl: image,
+                imageUrl: book.image,
               ),
               const SizedBox(
                 width: 30.0,
@@ -39,8 +40,8 @@ class BestSellerItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //book title
-                    const BestSellerItemTitle(
-                      title: 'the book title',
+                    BestSellerItemTitle(
+                      title: book.title,
                     ),
                     const SizedBox(
                       height: 3.0,
@@ -48,7 +49,7 @@ class BestSellerItem extends StatelessWidget {
 
                     //author name
                     Text(
-                      'Author name',
+                      book.authorName ?? '',
                       style: Styles.text14,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

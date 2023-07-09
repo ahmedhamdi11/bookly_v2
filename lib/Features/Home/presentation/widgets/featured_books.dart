@@ -1,10 +1,14 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'featured_book_item.dart';
 
 class FeaturedBooks extends StatelessWidget {
-  const FeaturedBooks({super.key});
-
+  const FeaturedBooks({
+    super.key,
+    required this.books,
+  });
+  final List<BookEntity> books;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,9 +19,9 @@ class FeaturedBooks extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           itemCount: 10, //state.books.length,
-          itemBuilder: (context, index) => const FeaturedBookItem(
-              // book: state.books[index],
-              ),
+          itemBuilder: (context, index) => FeaturedBookItem(
+            book: books[index],
+          ),
         ),
       ),
     );
