@@ -1,3 +1,4 @@
+import 'package:bookly_v2/Features/Home/domain/entities/book_entity.dart';
 import 'package:bookly_v2/Features/Home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_v2/Features/Home/presentation/manager/newest_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_v2/Features/Home/presentation/widgets/best_seller_books.dart';
@@ -19,19 +20,7 @@ class HomeViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //featured books listView
-          BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
-            builder: (context, state) {
-              if (state is FeaturedBooksSuccessState) {
-                return FeaturedBooks(
-                  books: state.featuredBooks,
-                );
-              } else if (state is FeaturedBooksFailureState) {
-                return Text(state.errMessage);
-              } else {
-                return const FeaturedBooksShimmer();
-              }
-            },
-          ),
+          const FeaturedBooksBlocConsumer(),
 
           // Newest Books title
           const Padding(
@@ -63,42 +52,42 @@ class HomeViewBody extends StatelessWidget {
         ],
       ),
     );
+  }
+}
 
-    // return BlocBuilder<NewestBooksCubit, NewestBooksState>(
-    //   builder: (context, state) {
-    //     if (state is NewestBooksFailureState) {
-    //       return FailureUi(
-    //         errMessage: state.errMessage,
-    //       );
-    //     } else {
-    //       return SingleChildScrollView(
-    //         physics: const BouncingScrollPhysics(),
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: const [
-    //             //featured books listView
-    //             FeaturedBooks(),
+class FeaturedBooksBlocConsumer extends StatefulWidget {
+  const FeaturedBooksBlocConsumer({
+    super.key,
+  });
 
-    //             //Best seller title
-    //             Padding(
-    //               padding: EdgeInsets.only(left: 24.0),
-    //               child: Text(
-    //                 'Best Seller',
-    //                 style: Styles.text18,
-    //               ),
-    //             ),
+  @override
+  State<FeaturedBooksBlocConsumer> createState() =>
+      _FeaturedBooksBlocConsumerState();
+}
 
-    //             SizedBox(
-    //               height: 20,
-    //             ),
-
-    //             //best seller listViw
-    //             BestSellerBooks(),
-    //           ],
-    //         ),
-    //       );
-    //     }
-    //   },
-    // );
+class _FeaturedBooksBlocConsumerState extends State<FeaturedBooksBlocConsumer> {
+  List<BookEntity> books = [];
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<FeaturedBooksCubit, FeaturedBooksState>(
+      listener: (context, state) {
+        if (state is FeaturedBooksSuccessState) {
+          books.addAll(state.featuredBooks);
+        }
+      },
+      builder: (context, state) {
+        if (state is FeaturedBooksSuccessState ||
+            state is FeaturedBooksPaginationLoadingState ||
+            state is FeaturedBooksPaginationFailureState) {
+          return FeaturedBooks(
+            books: books,
+          );
+        } else if (state is FeaturedBooksFailureState) {
+          return Text(state.errMessage);
+        } else {
+          return const FeaturedBooksShimmer();
+        }
+      },
+    );
   }
 }

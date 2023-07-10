@@ -3,6 +3,6 @@ import 'package:bookly_v2/core/errors/failure.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class HomeRepo {
-  Future<Either<Failure, List<BookEntity>>> featchFeaturedBooks();
+  Future<Either<Failure, List<BookEntity>>> featchFeaturedBooks(int pageNumber);
   Future<Either<Failure, List<BookEntity>>> featchNewestBooks();
 }
